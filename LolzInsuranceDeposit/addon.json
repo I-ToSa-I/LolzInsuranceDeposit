@@ -1,0 +1,16 @@
+{
+    "legacy_addon_id": "",
+    "title": "[DevCore Studios] Lolz Insurance Deposit",
+    "description": "Добавляет страховой депозит как на zelenka.guru",
+    "version_id": 2000100,
+    "version_string": "2.0.1",
+    "dev": "DevCore Studios",
+    "dev_url": "https://zelenka.guru/tosa",
+    "faq_url": "https://zelenka.guru/tosa",
+    "support_url": "https://zelenka.guru/tosa",
+    "extra_urls": {
+        "Наш форум": "https://devcore.fun"
+    },
+    "require": [],
+    "icon": ""
+}

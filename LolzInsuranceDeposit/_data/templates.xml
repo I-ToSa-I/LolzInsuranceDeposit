@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="admin" title="dcs_crud_list" version_id="1020000" version_string="1.2.0"><![CDATA[<xf:macro name="full_block" arg-parentTemplate="!" arg-blockOuterMacro="" arg-searchFilterUrl=""
+		  arg-blockBodyBefore="" arg-blockBodyAfter=""
+		  arg-entities="!" arg-entityRow="!"
+		  arg-total="!" arg-perPage="!" arg-page="">
+	<div class="block">
+		<div class="block-outer">
+			<div class="block-outer-main">
+				<xf:if is="$blockOuterMacro">
+					<xf:macro template="{$parentTemplate}" name="{$blockOuterMacro}" />
+				</xf:if>
+			</div>
+
+			<xf:if is="$searchFilterUrl">
+				<xf:macro template="filter_macros" name="quick_filter"
+					arg-key="{$parentTemplate}"
+					arg-ajax="{$searchFilterUrl}"
+					arg-class="block-outer-opposite" />
+			</xf:if>
+		</div>
+
+		<div class="block-container">
+			<xf:if is="$blockBodyBefore">
+				<xf:macro template="{$parentTemplate}" name="{$blockBodyBefore}" />
+			</xf:if>
+
+			<div class="block-body">
+				<xf:datalist>
+					<xf:macro name="list" arg-entities="{$entities}" arg-page="{$page}"
+							  arg-parentTemplate="{$parentTemplate}" arg-entityRow="{$entityRow}" />
+
+					<xf:if is="$filter AND $total > $perPage">
+						<xf:datarow rowclass="dataList-row--note dataList-row--noHover js-filterForceShow">
+							<xf:cell colspan="2">{{ phrase('more_records_matching_filter_more_specific') }}</xf:cell>
+						</xf:datarow>
+					</xf:if>
+				</xf:datalist>
+			</div>
+
+			<div class="block-footer">
+				<span class="block-footer-counter">{{ display_totals($entities, $total) }}</span>
+			</div>
+
+			<xf:if is="$blockBodyAfter">
+				<xf:macro template="{$parentTemplate}" name="{$blockBodyAfter}"
+						  arg-entities="{$entities}" arg-total="{$total}"
+						  arg-perPage="{$perPage}" arg-page="{$page}" />
+			</xf:if>
+		</div>
+	</div>
+
+	<xf:pagenav
+		page="{$page}" perpage="{$perPage}" total="{$total}"
+		link="{$searchFilterUrl}"
+		params=""
+		data="{$style}"
+		wrapperclass="js-filterHide block-outer block-outer--after" />
+</xf:macro>
+
+<xf:macro name="list" arg-entities="!" arg-page="!" arg-parentTemplate="!" arg-entityRow="!">
+	<xf:foreach loop="$entities" value="$entity">
+		<xf:macro template="{$parentTemplate}" name="{$entityRow}" arg-entity="{$entity}" />
+	</xf:foreach>
+</xf:macro>]]></template>
+  <template type="admin" title="dcs_deposit_history_index" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:macro name="row" arg-entity="!">
+		<xf:if is="{$entity.type} == 1">
+			<xf:set var="$type" value="{{ phrase('dcs_num_x_deposit', {'num': $entity.log_id}) }}" />
+		<xf:else />
+			<xf:set var="$type" value="{{ phrase('dcs_num_x_withdraw', {'num': $entity.log_id}) }}" />
+		</xf:if>
+		<xf:datarow>
+			<xf:main href="{{ link('dcs-deposit/history/view', $entity) }}"
+					 label="{$type}"
+					 hash="{$entity.log_id}"
+					 overlay="true"
+					 dir="auto">
+				<xf:explain>
+					<ul class="listInline listInline--bullet">
+						<li>{{ date_time($entity.date) }}</li>
+						<li>{$entity.amount|number} {$xf.app.options->dcs_lid_suffixDepositSum}</li>
+						<li>{$entity.User.username}</li>
+					</ul>
+				</xf:explain>
+			</xf:main>
+		</xf:datarow>
+</xf:macro>
+
+<xf:title>{{ phrase('admin_navigation.dcsDepositHistory') }}</xf:title>
+
+<xf:macro template="dcs_crud_list" name="full_block" arg-parentTemplate="dcs_deposit_history_index"
+		  arg-searchFilterUrl="{$searchFilterUrl}" arg-entities="{$history}" arg-entityRow="row"
+		  arg-total="{$total}" arg-perPage="{$perPage}" arg-page="{$page}" />]]></template>
+  <template type="admin" title="dcs_deposit_history_view" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('dcs_transaction_num_x', {'num': $log.log_id}) }}</xf:title>
+
+<xf:set var="$suffix" value="{$xf.app.options->dcs_lid_suffixDepositSum}" />
+<xf:set var="$sum"	  value="{$user.dcs_lolz_deposit_amount}" />
+
+<div class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:if contentcheck="true">
+				<xf:contentcheck>
+						<xf:formrow label="{{ phrase('dcs_user') }}"><xf:username user="$user" /> ({$sum|number} {$suffix})</xf:formrow>
+						<xf:formrow label="{{ phrase('dcs_transaction_num') }}">{$log.log_id}</xf:formrow>
+						<xf:formrow label="{{ phrase('dcs_type') }}">
+							<xf:if is="{$log.type} == 1">
+								{{ phrase('dcs_log_deposit') }}
+							<xf:else />
+								{{ phrase('dcs_log_withdraw') }}
+							</xf:if>
+						</xf:formrow>
+						<xf:formrow label="{{ phrase('dcs_amount') }}">
+							<xf:if is="{$log.type} == 1">
+								<span style="color: rgb(0, 186, 120);">{$log.amount|number} {$suffix}</span>
+							<xf:else />
+								<span style="color: rgb(234, 76, 76);">-{$log.amount|number} {$suffix}</span>
+							</xf:if>
+						</xf:formrow>
+						<xf:formrow label="{{ phrase('dcs_date') }}">{{ date_time({$log.date}) }}</xf:formrow>
+				</xf:contentcheck>
+			</xf:if>
+		</div>
+	</div>
+</div>]]></template>
+  <template type="admin" title="dcs_deposit_users_add" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>Добавить депозит</xf:title>
+
+<xf:form action="{{ link('dcs-deposit/users/add-user') }}" class="block" ajax="true">
+<div class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:textboxrow name="username"
+				label="{{ phrase('dcs_user_name') }}"
+				required="true"/>
+			<xf:formrow rowtype="input"
+							rowclass="js-CustomAmount"
+							label="{{ phrase('dcs_amount') }}">
+					<div class="inputGroup">
+						<xf:numberbox name="amount"
+									  value="{$sum}"
+									  required="true" />
+							<span class="inputGroup-text">{$suffix}</span>	
+					</div>
+			</xf:formrow>
+			<xf:checkboxrow>
+				<xf:option name="add-history">{{ phrase('dcs_add_to_history') }}</xf:option>
+			</xf:checkboxrow>
+		</div>
+		<xf:submitrow sticky="true" icon="save" />
+	</div>
+</div>
+</xf:form>]]></template>
+  <template type="admin" title="dcs_deposit_users_index" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:macro name="row" arg-entity="!">
+		<xf:datarow>
+			<xf:main href="{{ link('dcs-deposit/users/view', $entity) }}"
+					 label="{$entity.username}"
+					 hash="{$entity.user_id}"
+					 dir="auto">
+				<xf:explain>{{ phrase('dcs_insurance_deposit') }}: {$entity.dcs_lolz_deposit_amount|number} {$xf.app.options->dcs_lid_suffixDepositSum}</xf:explain>
+			</xf:main>
+		</xf:datarow>
+</xf:macro>
+
+<xf:pageaction>
+	<xf:button href="{{ link('dcs-deposit/users/add') }}" icon="add">{{ phrase('dcs_add_deposit') }}</xf:button>
+</xf:pageaction>
+
+<xf:title>{{ phrase('admin_navigation.dcsDepositUsers') }}</xf:title>
+
+<xf:macro template="dcs_crud_list" name="full_block" arg-parentTemplate="dcs_deposit_users_index"
+		  arg-searchFilterUrl="{$searchFilterUrl}" arg-entities="{$users}" arg-entityRow="row"
+		  arg-total="{$total}" arg-perPage="{$perPage}" arg-page="{$page}" />]]></template>
+  <template type="admin" title="dcs_deposit_users_view" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('dcs_insurance_deposit') }} {$user.username}</xf:title>
+
+<xf:set var="$suffix" value="{$xf.app.options->dcs_lid_suffixDepositSum}" />
+<xf:set var="$sum"	  value="{$user.dcs_lolz_deposit_amount}" />
+
+<xf:form action="{{ link('dcs-deposit/users/save', $user) }}" class="block" ajax="true">
+<div class="block">
+	<div class="block-container">
+		<div class="block-body">
+				<xf:formrow label="{{ phrase('dcs_user') }}"><xf:username user="$user"/></xf:formrow>
+				<xf:formrow rowtype="input"
+							rowclass="js-CustomAmount"
+							label="{{ phrase('dcs_amount') }}">
+					<div class="inputGroup">
+						<xf:numberbox name="amount"
+									  value="{$sum}"
+									  required="true" />
+							<span class="inputGroup-text">{$suffix}</span>
+					</div>
+				</xf:formrow>
+		</div>
+		<h3 class="block-formSectionHeader">
+			<span class="collapseTrigger collapseTrigger--block is-active" data-xf-click="toggle" data-target="< :up:next">
+				<span class="block-formSectionHeader-aligner">{{ phrase('dcs_history') }}</span>
+			</span>
+		</h3>
+			<div class="block-body block-body--collapsible">
+			<xf:if contentcheck="true">
+				<xf:contentcheck>
+					<xf:foreach loop="$history" value="$value">
+						<xf:formrow label="{{ phrase('dcs_transaction_num') }}">{$value.log_id}</xf:formrow>
+						<xf:formrow label="{{ phrase('dcs_type') }}">
+							<xf:if is="{$value.type} == 1">
+								{{ phrase('dcs_log_deposit') }}
+							<xf:else />
+								{{ phrase('dcs_log_withdraw') }}
+							</xf:if>
+						</xf:formrow>
+						<xf:formrow label="{{ phrase('dcs_amount') }}">
+							<xf:if is="{$value.type} == 1">
+								<span style="color: rgb(0, 186, 120);">{$value.amount|number} {$suffix}</span>
+							<xf:else />
+								<span style="color: rgb(234, 76, 76);">-{$value.amount|number} {$suffix}</span>
+							</xf:if>
+						</xf:formrow>
+						<xf:formrow label="{{ phrase('dcs_date') }}">{{ date_time({$value.date}) }}</xf:formrow>
+					</xf:foreach>
+				</xf:contentcheck>
+			</xf:if>
+				</div>
+	<xf:submitrow sticky="true" icon="save" />
+	</div>
+</div>
+</xf:form>]]></template>
+  <template type="admin" title="dcs_lid_option_template_cost" version_id="1000000" version_string="1.0.0"><![CDATA[<xf:formrow
+		label="{$option.title}"
+		hint="{$hintHtml}"
+		explain="{$explainHtml}"
+		html="{$listedHtml}"
+		rowclass="{$rowClass}">
+	<div class="inputGroup">
+		<xf:numberbox name="{$inputName}[minDep]" value="{{ $option.option_value.minDep ?: 1 }}" step="any" />
+		<span class="inputGroup-splitter"></span>
+		<xf:macro template="public:currency_macros" name="currency_list"
+				  arg-name="{$inputName}[minDep_currency]"
+				  arg-value="{{ $option.option_value.minDep_currency ?: 'USD' }}"
+				  arg-class="input--autoSize" />
+	</div>
+	<div class="formRow-explain">{{ phrase('cost_currency_explain') }}</div>
+</xf:formrow>]]></template>
+  <template type="admin" title="dcs_lid_option_template_paymentProfiles" version_id="1000000" version_string="1.0.0"><![CDATA[<xf:checkboxrow name="{$inputName}" value="{$option.option_value}"
+				label="{$option.title}"
+				hint="{$hintHtml}"
+				explain="{$explainHtml}"
+				html="{$listedHtml}">
+	<xf:foreach loop="$xf.app.em.getRepository('XF:Payment').findPaymentProfilesForList().fetch()" key="$profileId" value="$profile">
+		<xf:option value="{$profileId}" label="{{ $profile.Provider.title !== $profile.title ? $profile.Provider.title . ' - ' . $profile.title : $profile.Provider.title }}" />
+	</xf:foreach>
+</xf:checkboxrow>]]></template>
+  <template type="public" title="alert_takeoff_request_completed" version_id="1010000" version_string="1.1.0"><![CDATA[{{ phrase("dcs_lid_your_request_was_completed") }}]]></template>
+  <template type="public" title="alert_takeoff_request_rejected" version_id="1010000" version_string="1.1.0"><![CDATA[{{ phrase("dcs_lid_your_request_was_rejected") }}]]></template>
+  <template type="public" title="approval_item_takeoff_request" version_id="1010000" version_string="1.1.0"><![CDATA[<xf:set var="$messageHtml">
+	<h4 class="message-title">
+		{{ phrase('dcs_lid_deposit_amount_for_takeoff_x', {'x': $content.request_amount}) }}
+	</h4>
+</xf:set>
+
+<xf:macro template="approval_queue_macros" name="item_message_type"
+	arg-content="{$content}"
+	arg-contentDate="{$content.creation_date}"
+	arg-user="{$content.User}"
+	arg-messageHtml="{$messageHtml}"
+	arg-typePhraseHtml="{{ phrase('dcs_lid_takeoff_request') }}"
+	arg-spamDetails="{$spamDetails}"
+	arg-unapprovedItem="{$unapprovedItem}"
+	arg-handler="{$handler}"
+	arg-headerPhraseHtml="" />]]></template>
+  <template type="public" title="dcs_account_deposit_purchase_complete" version_id="1010000" version_string="1.1.0"><![CDATA[<xf:title>{{ phrase('thanks_for_your_purchase') }}</xf:title>
+
+<!--<xf:wrap template="account_wrapper" />-->
+
+<div class="blockMessage">{{ phrase("dcs_you_successfully_replenished_deposit") }}</div>]]></template>
+  <template type="public" title="dcs_deposit_widget" version_id="1010000" version_string="1.1.0"><![CDATA[<xf:css>
+
+.lzt {
+	margin-left: 20px;
+	color: rgb(0, 186, 120);
+	vertical-align: 10px;
+	}
+
+</xf:css>
+
+<div class="block" {{ widget_data($widget) }}>
+        <div class="block-container">
+            <h3 class="block-minorHeader">
+                {{ phrase('dcs_insurance_deposit') }} <xf:username user="$user" rich="true"/>
+            </h3>
+                <xf:if is="{$deposit_amount} == 0">
+					<h3 style="margin-left: 20px; color: rgb(234, 76, 76);">{$deposit_amount} {$suffix}</h3>
+				<xf:else />
+					<h3 style="margin-left: 20px; color: rgb(0, 186, 120);">{$deposit_amount} {$suffix}</h3>
+				</xf:if>
+			<xf:if is="{$user.user_id} == {$xf.visitor.user_id} AND !{{ in_array($user.user_id, $users) }}">
+				<div class="block-footer" style="text-align: center;">
+<xf:button href="{{ link('account/deposit') }}" data-xf-click="overlay">{{ phrase('dcs_deposit') }}</xf:button> <xf:button href="{{ link('account/deposit/takeoff') }}" data-xf-click="overlay">{{ phrase('dcs_withdraw') }}</xf:button>
+				</div>
+				<xf:else />				
+				<xf:if is="{{ in_array($user.user_id, $users) }}">
+					<div style="margin-bottom: 10px">
+							<span class='lzt'>{{ phrase("dcs_deposit_synchronized_with_lzt") }}</span>
+						</div>
+				<xf:else />
+					<br>
+				</xf:if>
+					</xf:if>
+
+        </div>
+</div>]]></template>
+  <template type="public" title="dcs_takeoff_create" version_id="1010000" version_string="1.1.0"><![CDATA[<div class="blockMessage">{{ phrase("dcs_you_create_withdrawal_request") }}</div>]]></template>
+  <template type="public" title="dcs_takeoff_create_yes_no" version_id="1010000" version_string="1.1.0"><![CDATA[<div class="blockMessage">
+	{{ phrase("dcs_are_you_want_withdraw_money_from_deposit") }}<br><br>
+	<div style="text-align: center;">
+		<xf:button href="{{ link('account/deposit/takeoff/create') }}">{{ phrase("dcs_yes") }}</xf:button> <xf:button class="js-overlayClose">{{ phrase("dcs_no") }}</xf:button>
+	</div>
+</div>]]></template>
+  <template type="public" title="deposit_view" version_id="1010000" version_string="1.1.0"><![CDATA[<div class="block">
+        <div class="block-container">
+            <h3 class="block-minorHeader">
+               	{{ phrase('dcs_insurance_deposit_replenish') }}
+            </h3>
+			<xf:form action="{{ link('purchase/deposit') }}" ajax="true" data-xf-init="payment-provider-container">
+								<xf:formrow rowtype="input"
+										rowclass="js-CustomAmount"
+										label="{{ phrase('dcs_amount') }}"
+										hint="{{ phrase('dcs_minimum_amount_for_replenishment_is_x_y', {'minDep': $minDep, 'suffix': $suffix}) }}">
+									<div class="inputGroup">
+										<xf:numberbox name="amount"
+											value="{$minDep}"
+											required="true" />
+										<span class="inputGroup-text">{$currency}</span>
+									</div>
+								</xf:formrow>
+								
+								<xf:formrow rowtype="button">
+								<xf:if is="{{ count($profiles) > 1 }}">
+									<xf:select name="payment_profile_id">
+											<xf:option>{{ phrase('(choose_payment_method)') }}</xf:option>
+											<xf:foreach loop="$profiles" value="$profile">
+												<xf:option value="{$profile.id}">{$profile.title}</xf:option>
+											</xf:foreach>
+										</xf:select>
+								<xf:else />
+									<xf:button type="submit" icon="purchase" class="button--primary"/>
+
+									<xf:hiddenval name="payment_profile_id">{$profiles.0.id}</xf:hiddenval>
+								</xf:if>
+									
+							</xf:formrow>
+							<xf:if is="{{ count($profiles) > 1 }}">
+								<xf:submitrow icon="purchase" sticky="true" />
+							</xf:if>
+						</xf:form>
+        </div>
+</div>]]></template>
+</templates>

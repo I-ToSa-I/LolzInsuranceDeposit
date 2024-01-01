@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content_type_fields>
+  <field content_type="takeoff_request" field_name="alert_handler_class">DCS\LolzInsuranceDeposit\Alert\TakeOffRequest</field>
+  <field content_type="takeoff_request" field_name="approval_queue_handler_class">DCS\LolzInsuranceDeposit\ApprovalQueue\TakeOffRequest</field>
+  <field content_type="takeoff_request" field_name="entity">DCS\LolzInsuranceDeposit:TakeOffRequest</field>
+</content_type_fields>

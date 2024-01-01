@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<routes>
+  <route route_type="admin" route_prefix="dcs-deposit" sub_name="history" format="history/:int&lt;log_id&gt;/" controller="DCS\LolzInsuranceDeposit:History"/>
+  <route route_type="admin" route_prefix="dcs-deposit" sub_name="users" format="users/:int&lt;user_id&gt;/" controller="DCS\LolzInsuranceDeposit:Users"/>
+  <route route_type="public" route_prefix="account" sub_name="deposit" format="deposit/" controller="XF:Account" action_prefix="Deposit"/>
+</routes>

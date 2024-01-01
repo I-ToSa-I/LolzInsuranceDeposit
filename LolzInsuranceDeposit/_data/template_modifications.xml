@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="message_macros" modification_key="dcs_lid_message_macros" description="Adds &quot;deposit&quot; to user info in message" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="$extras.custom_fields">]]></find>
+    <replace><![CDATA[<dl class="pairs pairs--justified">
+							<dt>{{ phrase("dcs_deposit") }}</dt>
+							<dd>
+								<xf:if is="{$user.dcs_lolz_deposit_amount} == 0">
+									<span style="color: rgb(234, 76, 76);">{$user.dcs_lolz_deposit_amount}</span>
+								<xf:else />
+									<span style="color: rgb(0, 186, 120);">{$user.dcs_lolz_deposit_amount|number}</span>
+								</xf:if>
+							</dd>
+					</dl>
+<xf:if is="$extras.custom_fields">]]></replace>
+  </modification>
+</template_modifications>

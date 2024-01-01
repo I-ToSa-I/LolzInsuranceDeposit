@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<admin_navigation>
+  <admin_navigation_entry navigation_id="dcsDeposit" display_order="289" link="dsc-deposit" icon="fa-money-bill-wave" debug_only="0" development_only="0" hide_no_children="1"/>
+  <admin_navigation_entry navigation_id="dcsDepositHistory" parent_navigation_id="dcsDeposit" display_order="70" link="dcs-deposit/history" debug_only="0" development_only="0" hide_no_children="0"/>
+  <admin_navigation_entry navigation_id="dcsDepositUsers" parent_navigation_id="dcsDeposit" display_order="60" link="dcs-deposit/users" debug_only="0" development_only="0" hide_no_children="0"/>
+</admin_navigation>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="admin_navigation.dcsDeposit" version_id="100000" version_string="1.0.0"><![CDATA[[DCS] Deposit]]></phrase>
+  <phrase title="admin_navigation.dcsDepositHistory" version_id="100000" version_string="1.0.0"><![CDATA[History transactions]]></phrase>
+  <phrase title="admin_navigation.dcsDepositUsers" version_id="100000" version_string="1.0.0"><![CDATA[Users]]></phrase>
+  <phrase title="dcs_add_deposit" version_id="2000000" version_string="2.0.0"><![CDATA[Add deposit]]></phrase>
+  <phrase title="dcs_add_to_history" version_id="2000000" version_string="2.0.0"><![CDATA[Add to history]]></phrase>
+  <phrase title="dcs_amount" version_id="1010000" version_string="1.1.0"><![CDATA[Amount]]></phrase>
+  <phrase title="dcs_are_you_want_withdraw_money_from_deposit" version_id="1010000" version_string="1.1.0"><![CDATA[Are you sure you want to withdraw money from the deposit?]]></phrase>
+  <phrase title="dcs_date" version_id="2000000" version_string="2.0.0"><![CDATA[Date]]></phrase>
+  <phrase title="dcs_deposit" version_id="1010000" version_string="1.1.0"><![CDATA[Deposit]]></phrase>
+  <phrase title="dcs_deposit_synchronized_with_lzt" version_id="1010000" version_string="1.1.0"><![CDATA[Deposit synchronized with LZT]]></phrase>
+  <phrase title="dcs_history" version_id="2000000" version_string="2.0.0"><![CDATA[History]]></phrase>
+  <phrase title="dcs_insurance_deposit" version_id="1010000" version_string="1.1.0"><![CDATA[Insurance Deposit]]></phrase>
+  <phrase title="dcs_insurance_deposit_replenish" version_id="1010000" version_string="1.1.0"><![CDATA[Insurance Deposit Replenish]]></phrase>
+  <phrase title="dcs_lid_deposit_amount_for_takeoff_x" version_id="1010000" version_string="1.1.0"><![CDATA[Deposit amount for take off: <strong>{x}.</strong>]]></phrase>
+  <phrase title="dcs_lid_takeoff_request" version_id="1010000" version_string="1.1.0"><![CDATA[Take off deposit request]]></phrase>
+  <phrase title="dcs_lid_your_request_was_completed" version_id="1010000" version_string="1.1.0"><![CDATA[Your request for withdrawal of the deposit has been reviewed, the administration will contact you shortly.]]></phrase>
+  <phrase title="dcs_lid_your_request_was_rejected" version_id="1010000" version_string="1.1.0"><![CDATA[Your withdrawal request has been cancelled.]]></phrase>
+  <phrase title="dcs_log_deposit" version_id="2000000" version_string="2.0.0"><![CDATA[Deposit]]></phrase>
+  <phrase title="dcs_log_withdraw" version_id="2000000" version_string="2.0.0"><![CDATA[Withdraw]]></phrase>
+  <phrase title="dcs_minimum_amount_for_replenishment_is_x_y" version_id="1010000" version_string="1.1.0"><![CDATA[The minimum amount for replenishment is {minDep} {suffix}]]></phrase>
+  <phrase title="dcs_no" version_id="1010000" version_string="1.1.0"><![CDATA[No]]></phrase>
+  <phrase title="dcs_num_x_deposit" version_id="2000000" version_string="2.0.0"><![CDATA[Deposit №{num}]]></phrase>
+  <phrase title="dcs_num_x_withdraw" version_id="2000000" version_string="2.0.0"><![CDATA[Withdraw №{num}]]></phrase>
+  <phrase title="dcs_transaction_num" version_id="2000000" version_string="2.0.0"><![CDATA[Transaction №]]></phrase>
+  <phrase title="dcs_transaction_num_x" version_id="2000000" version_string="2.0.0"><![CDATA[Transaction №{num}]]></phrase>
+  <phrase title="dcs_type" version_id="2000000" version_string="2.0.0"><![CDATA[Type]]></phrase>
+  <phrase title="dcs_user" version_id="2000000" version_string="2.0.0"><![CDATA[User]]></phrase>
+  <phrase title="dcs_user_name" version_id="2000000" version_string="2.0.0"><![CDATA[User name]]></phrase>
+  <phrase title="dcs_withdraw" version_id="1010000" version_string="1.1.0"><![CDATA[Withdraw]]></phrase>
+  <phrase title="dcs_yes" version_id="1010000" version_string="1.1.0"><![CDATA[Yes]]></phrase>
+  <phrase title="dcs_you_cannot_deposit_withdraw_from_deposit_because_deposit_tied_to_lzt" version_id="1010000" version_string="1.1.0"><![CDATA[You cannot deposit/withdraw money from the security deposit, as your security deposit is "tied" to LZT]]></phrase>
+  <phrase title="dcs_you_cannot_withdraw_from_deposit_because_balance_is_zero" version_id="1010000" version_string="1.1.0"><![CDATA[You cannot withdraw money from the security deposit because its current balance is zero.]]></phrase>
+  <phrase title="dcs_you_create_withdrawal_request" version_id="1010000" version_string="1.1.0"><![CDATA[You have created a withdrawal request.]]></phrase>
+  <phrase title="dcs_you_successfully_replenished_deposit" version_id="1010000" version_string="1.1.0"><![CDATA[You have successfully replenished the deposit!]]></phrase>
+  <phrase title="member_stat.most_deposit_amount" version_id="2021170" version_string="2.2.11"><![CDATA[Больше всех депозит]]></phrase>
+  <phrase title="option.dcs_lid_minDep" version_id="1010000" version_string="1.1.0"><![CDATA[Minimum deposit amount]]></phrase>
+  <phrase title="option.dcs_lid_paymentProfiles" version_id="1010000" version_string="1.1.0"><![CDATA[Allowed payment profiles]]></phrase>
+  <phrase title="option.dcs_lid_suffixDepositSum" version_id="1010000" version_string="1.1.0"><![CDATA[Widget Amount Suffix]]></phrase>
+  <phrase title="option.dcs_lid_usersLzt" version_id="1010000" version_string="1.1.0"><![CDATA[Users who will have the inscription "Deposit synchronized with LZT"]]></phrase>
+  <phrase title="option_explain.dcs_lid_minDep" version_id="1000030" version_string="1.1.0"><![CDATA[]]></phrase>
+  <phrase title="option_explain.dcs_lid_paymentProfiles" version_id="1000030" version_string="1.1.0"><![CDATA[]]></phrase>
+  <phrase title="option_explain.dcs_lid_suffixDepositSum" version_id="1010000" version_string="1.1.0"><![CDATA[]]></phrase>
+  <phrase title="option_explain.dcs_lid_usersLzt" version_id="1000030" version_string="1.1.0"><![CDATA[]]></phrase>
+  <phrase title="option_group.dcs_lolzInsuranceDeposit" version_id="1000030" version_string="1.1.0 "><![CDATA[[DCS] Lolz Insurance Deposit]]></phrase>
+  <phrase title="option_group_description.dcs_lolzInsuranceDeposit" version_id="1000030" version_string="1.1.0"><![CDATA[Lolz Insurance Deposit (Add-on: [DevCore Studios] Lolz Insurance Deposit)]]></phrase>
+  <phrase title="permission_interface.dcs_lolzInsuranceDeposit" version_id="1000030" version_string="1.1.0"><![CDATA[[DCS] Lolz Insurance Deposit]]></phrase>
+  <phrase title="widget_def.dcs_deposit" version_id="100000" version_string="1.0.0"><![CDATA[[DevCore Studios] Deposit]]></phrase>
+  <phrase title="widget_def_desc.dcs_deposit" version_id="100000" version_string="1.0.0"><![CDATA[[DevCore Studios] Deposit]]></phrase>
+</phrases>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<options>
+  <option option_id="dcs_lid_minDep" edit_format="template" data_type="array" validation_class="DCS\LolzInsuranceDeposit\Option\MinDep" validation_method="verifyOption" advanced="0">
+    <default_value>{"minDep":0,"minDep_currency":"USD"}</default_value>
+    <edit_format_params>dcs_lid_option_template_cost</edit_format_params>
+    <sub_options>minDep
+      minDep_currency
+    </sub_options>
+    <relation group_id="dcs_lolzInsuranceDeposit" display_order="110"/>
+  </option>
+  <option option_id="dcs_lid_paymentProfiles" edit_format="template" data_type="array" advanced="0">
+    <default_value>[]</default_value>
+    <edit_format_params>dcs_lid_option_template_paymentProfiles</edit_format_params>
+    <sub_options>*</sub_options>
+    <relation group_id="dcs_lolzInsuranceDeposit" display_order="100"/>
+  </option>
+  <option option_id="dcs_lid_suffixDepositSum" edit_format="textbox" data_type="string" advanced="0">
+    <default_value>₽</default_value>
+    <relation group_id="dcs_lolzInsuranceDeposit" display_order="120"/>
+  </option>
+  <option option_id="dcs_lid_usersLzt" edit_format="username" data_type="array" advanced="0">
+    <default_value>[]</default_value>
+    <sub_options>*</sub_options>
+    <relation group_id="dcs_lolzInsuranceDeposit" display_order="500"/>
+  </option>
+</options>
