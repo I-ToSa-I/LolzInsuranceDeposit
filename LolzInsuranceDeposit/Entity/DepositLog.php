@@ -2,7 +2,6 @@
 namespace DCS\LolzInsuranceDeposit\Entity;
 
 use XF;
-use XF\Entity\ApprovalQueue;
 use XF\Entity\User;
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
@@ -10,19 +9,17 @@ use XF\Mvc\Entity\Structure;
 /**
  * COLUMNS
  * @property int user_id
- * @property int request_amount
- * @property int status
- * @property int creation_date
+ * @property int log_id
+ * @property int amount
+ * @property int type
+ * @property int date
  *
  * RELATIONS
  * @property User User
- * @property ApprovalQueue ApprovalQueue
  */
 class DepositLog extends Entity
 {
-    /**
-     * @return bool
-     */
+
     public function canView()
     {
         return XF::visitor()->is_super_admin || XF::visitor()->user_id == $this->user_id;
@@ -36,11 +33,6 @@ class DepositLog extends Entity
     }
 
 
-    /**
-     * @param Structure $structure
-     *
-     * @return Structure
-     */
     public static function getStructure(Structure $structure)
     {
         $structure->table = 'xf_dcs_lolz_deposits_logs';

@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace DCS\LolzInsuranceDeposit;
 
-use XF;
 use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;
 use XF\AddOn\StepRunnerUninstallTrait;
@@ -31,7 +30,7 @@ class Setup extends AbstractSetup
             $table->addColumn("log_id", 'int')->autoIncrement();
             $table->addColumn('user_id', 'int');
             $table->addColumn('amount', 'int');
-            $table->addColumn('type', 'int');
+            $table->addColumn('type', 'int')->nullable();
             $table->addColumn("date", 'int')->setDefault(0);
         });
     }
@@ -87,7 +86,7 @@ class Setup extends AbstractSetup
 
         $this->schemaManager()->alterTable('xf_user', function (Alter $table)
         {
-            $table->dropColumns('deposit');
+            $table->dropColumns('dcs_lolz_deposit_amount');
         });
 
         $this->db()->delete('xf_purchasable', "purchasable_type_id = 'deposit'");

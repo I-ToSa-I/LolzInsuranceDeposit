@@ -9,9 +9,7 @@ class Account extends XFCP_Account
 {
 
     public function actionDeposit() {
-
-        $visitor = \XF::visitor();
-
+        $visitor = XF::visitor();
         $paymentRepo = $this->repository('XF:Payment');
         $options = $this->options();
 
@@ -23,6 +21,7 @@ class Account extends XFCP_Account
         $allowedProfiles = $options->dcs_lid_paymentProfiles;
         $minDep = $options->dcs_lid_minDep;
         $profiles = $paymentRepo->findPaymentProfilesForList()->fetch();
+        $availableProfiles = array();
         foreach ($profiles as $profile)
         {
             if ($profile->active && in_array($profile->payment_profile_id, $allowedProfiles))
@@ -55,7 +54,7 @@ class Account extends XFCP_Account
     public  function actionDeposittakeoff()
     {
         $visitor = XF::visitor();
-        $options = XF::options();
+        $options = $this->options();
 
         if ($visitor->dcs_lolz_deposit_amount <= 0)
         {
@@ -67,14 +66,11 @@ class Account extends XFCP_Account
             return $this->error(XF::phrase("dcs_you_cannot_deposit_withdraw_from_deposit_because_deposit_tied_to_lzt"));
         }
 
-
         return $this->view('DCS/LolzInsuranceDeposit:Deposit', 'dcs_takeoff_create_yes_no', []);
     }
 
     public  function actionDeposittakeoffCreate()
     {
-
-
         $visitor = XF::visitor();
         $options = XF::options();
         $amount = $visitor->dcs_lolz_deposit_amount;
@@ -83,7 +79,6 @@ class Account extends XFCP_Account
         {
             return $this->error(XF::phrase("dcs_you_cannot_withdraw_from_deposit_because_balance_is_zero"));
         }
-
 
         if (in_array($visitor->user_id, $options->dcs_lid_usersLzt))
         {

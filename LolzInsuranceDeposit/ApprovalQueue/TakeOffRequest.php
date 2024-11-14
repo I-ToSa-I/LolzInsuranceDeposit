@@ -26,9 +26,7 @@ class TakeOffRequest extends AbstractHandler
         return XF::visitor()->is_super_admin;
     }
 
-    /**
-     * @param \DCS\LolzInsuranceDeposit\Entity\TakeOffRequest $request
-     */
+
     public function actionApprove(\DCS\LolzInsuranceDeposit\Entity\TakeOffRequest $request)
     {
         $req = XF::finder('DCS\LolzInsuranceDeposit:TakeOffRequest')->where("takeoff_request_id", '=',
@@ -52,9 +50,7 @@ class TakeOffRequest extends AbstractHandler
         $alertRepo->alertFromUser($request->User, $request->User, 'takeoff_request', $request->takeoff_request_id, 'completed');
     }
 
-    /**
-     * @param \DCS\LolzInsuranceDeposit\Entity\TakeOffRequest $request
-     */
+
     public function actionDelete(\DCS\LolzInsuranceDeposit\Entity\TakeOffRequest $request)
     {
         $finder = XF::finder('XF:User');

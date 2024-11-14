@@ -10,9 +10,10 @@ use XF\PrintableException;
 
 /**
  * COLUMNS
+ * @property int takeoff_request_id
  * @property int user_id
  * @property int request_amount
- * @property int status
+ * @property string status
  * @property int creation_date
  *
  * RELATIONS
@@ -21,9 +22,7 @@ use XF\PrintableException;
  */
 class TakeOffRequest extends Entity
 {
-    /**
-     * @return XF\Phrase
-     */
+
     public function getStatusPhrase()
     {
         return XF::phrase('dcs_lid_takeOffRequest_status_' . $this->status);
